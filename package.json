@@ -1,0 +1,57 @@
+{
+	"author": {
+		"name": "Baptiste Pillot",
+		"email": "baptiste@pillot.fr"
+	},
+	"dependencies": {
+		"@itrocks/class-type": "latest",
+		"@itrocks/decorator": "latest"
+	},
+	"description": "Retrieve the absolute file path of an imported class",
+	"devDependencies": {
+		"@types/node": "^22.9",
+		"typescript": "~5.6"
+	},
+	"engines": {
+		"node": ">=18"
+	},
+	"exports": {
+		".": {
+			"import": "./esm/class-file.js",
+			"require": "./cjs/class-file.js"
+		},
+		"./automation": {
+			"require": "./cjs/automation.js"
+		}
+	},
+	"files": [
+		"LICENSE",
+		"README.md",
+		"*/*.d.ts",
+		"*/*.js"
+	],
+	"keywords": [
+		"automated",
+		"class",
+		"decorator",
+		"file",
+		"it.rocks",
+		"path"
+	],
+	"license": "LGPL-3.0-or-later",
+	"name": "@itrocks/class-file",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/itrocks-ts/class-file.git"
+	},
+	"scripts": {
+		"build": "npm run build:cjs && npm run build:esm",
+		"build:cjs": "npm run pre:cjs && tsc -p tsconfig.cjs.json",
+		"build:esm": "npm run pre:esm && tsc -p tsconfig.esm.json && npm run pre:cjs",
+		"pre:cjs": "sed -i 's/\"type\": \"module\"/\"type\": \"commonjs\"/' package.json",
+		"pre:esm": "sed -i 's/\"type\": \"commonjs\"/\"type\": \"module\"/' package.json"
+	},
+	"type": "commonjs",
+	"types": "./esm/class-file.d.ts",
+	"version": "0.0.1"
+}
