@@ -5,7 +5,8 @@
 	},
 	"dependencies": {
 		"@itrocks/class-type": "latest",
-		"@itrocks/decorator": "latest"
+		"@itrocks/decorator": "latest",
+		"@itrocks/sorted-array": "latest"
 	},
 	"description": "Retrieve the absolute file path of an imported class",
 	"devDependencies": {
@@ -53,5 +54,5 @@
 	},
 	"type": "commonjs",
 	"types": "./esm/class-file.d.ts",
-	"version": "0.0.4"
+	"version": "0.0.5"
 }
