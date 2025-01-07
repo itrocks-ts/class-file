@@ -33,13 +33,19 @@ require('@itrocks/class-file/automation')
 This enables automatic file path resolution for all subsequently imported classes.
 
 **ESModule:** Requires manual setup.\
-Due to the limitation of ESM, you must explicitly decorate classes with the `@File(import.meta.filename)` decorator
-to enable file path resolution. Without this decorator, `fileOf()` will return `undefined`.
+Due to the limitation of ESM, you must explicitly decorate classes with the `@File(fileURLToPath(import.meta.url))`
+decorator to enable file path resolution. Without this decorator, `fileOf()` will return `undefined`.
 
 ## Example
 
-Given a file `my-class.js`:
+Given a file `my-class.js`, with CommonJS transpilation:
 ```ts
+export default class MyClass {}
+```
+Or on transpiling to an ESModule:
+```ts
+import { fileURLToPath } from 'node:url'
+@File(fileURLToPath(import.meta.url))
 export default class MyClass {}
 ```
 
