@@ -1,12 +1,11 @@
-import { baseType, isAnyType } from '@itrocks/class-type'
-import { SortedArray }         from '@itrocks/sorted-array'
-import { normalize }           from 'node:path'
-import File                    from './class-file'
+import { baseType, isAnyType }   from '@itrocks/class-type'
+import { decorate, decoratorOf } from '@itrocks/decorator/class'
+import { normalize }             from 'node:path'
+import { File, fileOf }          from './class-file'
+
+const HAS_FILE = Symbol('hasFile')
 
 const Module = require('module')
-
-const already: string[] = new SortedArray<string>()
-
 const superRequire: (...args: any) => typeof Module = Module.prototype.require
 
 Module.prototype.require = function(file: string)
@@ -18,13 +17,13 @@ Module.prototype.require = function(file: string)
 	}
 	file = normalize(require.resolve(file))
 
-	if (already.includes(file)) {
+	if (decoratorOf(module, HAS_FILE, false)) {
 		return module
 	}
-	already.push(file)
+	decorate(HAS_FILE, true)(module)
 
 	for (const object of Object.values(module)) {
-		if (isAnyType(object)) {
+		if (isAnyType(object) && !fileOf(baseType(object))) {
 			File(file)(baseType(object))
 		}
 	}
