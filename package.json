@@ -28,7 +28,8 @@
 		"LICENSE",
 		"README.md",
 		"*/*.d.ts",
-		"*/*.js"
+		"*/*.js",
+		"!test"
 	],
 	"homepage": "https://it.rocks",
 	"keywords": [
@@ -49,9 +50,12 @@
 		"build": "npm run build:cjs && npm run build:esm",
 		"build:cjs": "npm run pre:cjs && tsc -p tsconfig.cjs.json",
 		"build:esm": "npm run pre:esm && tsc -p tsconfig.esm.json && npm run pre:cjs",
+		"build:test": "npm run build:cjs && tsc -p tsconfig.test.json",
 		"pre:cjs": "sed -i 's/\"type\": \"module\"/\"type\": \"commonjs\"/' package.json",
-		"pre:esm": "sed -i 's/\"type\": \"commonjs\"/\"type\": \"module\"/' package.json"
+		"pre:esm": "sed -i 's/\"type\": \"commonjs\"/\"type\": \"module\"/' package.json",
+		"test": "node test/test"
 	},
+	"type": "commonjs",
 	"types": "./esm/class-file.d.ts",
-	"version": "0.0.10"
+	"version": "0.0.11"
 }
