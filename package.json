@@ -34,6 +34,7 @@
 	"homepage": "https://it.rocks",
 	"keywords": [
 		"automated",
+		"backend",
 		"class",
 		"decorator",
 		"file",
@@ -57,5 +58,5 @@
 	},
 	"type": "commonjs",
 	"types": "./esm/class-file.d.ts",
-	"version": "0.0.12"
+	"version": "0.0.13"
 }
