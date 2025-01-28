@@ -58,5 +58,5 @@
 	},
 	"type": "commonjs",
 	"types": "./esm/class-file.d.ts",
-	"version": "0.0.13"
+	"version": "0.0.14"
 }
