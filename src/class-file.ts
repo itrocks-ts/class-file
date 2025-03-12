@@ -1,5 +1,5 @@
-import { ObjectOrType }          from '@itrocks/class-type'
-import { decorate, decoratorOf } from '@itrocks/decorator/class'
+import { baseType, ObjectOrType, typeOf } from '@itrocks/class-type'
+import { decorate, ownDecoratorOf }       from '@itrocks/decorator/class'
 
 const FILE = Symbol('file')
 
@@ -11,5 +11,5 @@ export function File(file: string)
 
 export function fileOf(target: ObjectOrType)
 {
-	return decoratorOf(target, FILE, '')
+	return ownDecoratorOf(baseType(typeOf(target)), FILE, '')
 }
