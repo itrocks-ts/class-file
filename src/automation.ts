@@ -1,6 +1,6 @@
 import { baseType, isAnyType } from '@itrocks/class-type'
 import { normalize }           from 'node:path'
-import File                    from './class-file'
+import { File, fileOf }        from './class-file'
 
 const already = new Set<string>()
 
@@ -26,7 +26,10 @@ Module.prototype.require = function(file: string)
 
 	for (const object of Object.values(module)) {
 		if (isAnyType(object)) {
-			File(file)(baseType(object))
+			const type = baseType(object)
+			if (!fileOf(type)) {
+				File(file)(type)
+			}
 		}
 	}
 
