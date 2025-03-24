@@ -3,7 +3,6 @@ import { decorate, ownDecoratorOf }       from '@itrocks/decorator/class'
 
 const FILE = Symbol('file')
 
-export default File
 export function File(file: string)
 {
 	return decorate(FILE, file)
