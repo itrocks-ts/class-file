@@ -40,19 +40,20 @@ decorator to enable file path resolution. Without this decorator, `fileOf()` wil
 
 Given a file `my-class.js`, with CommonJS transpilation:
 ```ts
-export default class MyClass {}
+export class MyClass {}
 ```
 Or on transpiling to an ESModule:
 ```ts
 import { fileURLToPath } from 'node:url'
+
 @File(fileURLToPath(import.meta.url))
-export default class MyClass {}
+export class MyClass {}
 ```
 
 Retrieving the file path:
 ```ts
-import { fileOf } from '@itrocks/class-file'
-import MyClass    from './my-class.js'
+import { fileOf }  from '@itrocks/class-file'
+import { MyClass } from './my-class.js'
 
 console.log(fileOf(MyClass))       // Returns the absolute file path
 console.log(fileOf(new MyClass))   // Also returns the absolute file path
