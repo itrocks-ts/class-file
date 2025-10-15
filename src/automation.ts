@@ -1,6 +1,8 @@
-import { baseType, isAnyType } from '@itrocks/class-type'
-import { normalize }           from 'node:path'
-import { File, fileOf }        from './class-file'
+import { baseType }  from '@itrocks/class-type'
+import { isAnyType } from '@itrocks/class-type'
+import { normalize } from 'node:path'
+import { File }      from './class-file'
+import { fileOf }    from './class-file'
 
 const already = new Set<string>()
 const recurse = new Set<string>()
@@ -11,7 +13,7 @@ const superRequire: (...args: any) => typeof Module = Module.prototype.require
 Module.prototype.require = function(file: string)
 {
 	if (file[0] === '.') {
-		file = this.path + ((this.path[this.path.length - 1] === '/') ? '' : '/') + file
+		file = this.path + ((this.path[this.path.length - 1] === '/') ? file : ('/' + file))
 	}
 	file = normalize(require.resolve(file))
 
@@ -20,10 +22,9 @@ Module.prototype.require = function(file: string)
 	const module = superRequire.call(this, ...arguments)
 	recurse.delete(file)
 
-	if (recurses || (file[0] !== '/') || already.has(file)) {
+	if (recurses || ((file[0] !== '/') && (file[1] !== ':')) || already.has(file)) {
 		return module
 	}
-
 	already.add(file)
 
 	for (const object of Object.values(module)) {
