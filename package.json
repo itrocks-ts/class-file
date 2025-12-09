@@ -9,8 +9,8 @@
 	},
 	"description": "Retrieve the absolute file path of an imported class",
 	"devDependencies": {
-		"@types/node": "^22.9",
-		"typescript": "~5.8"
+		"@types/node": "^24.10",
+		"typescript": "~5.9"
 	},
 	"engines": {
 		"node": ">=18"
@@ -58,5 +58,5 @@
 	},
 	"type": "commonjs",
 	"types": "./esm/class-file.d.ts",
-	"version": "0.0.20"
+	"version": "0.0.21"
 }
